@@ -8,10 +8,12 @@
 
 import UIKit
 
-class BusinessesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class BusinessesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     
     var businesses: [Business]!
+    var searchBar = UISearchBar()
+    var category = "Thai"
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -19,8 +21,12 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        
-        Business.searchWithTerm(term: "Thai", completion: { (businesses: [Business]?, error: Error?) -> Void in
+        self.searchBar.delegate = self
+        self.navigationItem.titleView = searchBar
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 120
+            
+        Business.searchWithTerm(term: category, completion: { (businesses: [Business]?, error: Error?) -> Void in
             
             self.businesses = businesses
             self.tableView.reloadData()
@@ -64,7 +70,13 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//        if !searchText.isEmpty {
+//            category = searchText
+//            viewDidLoad()
+//        }
+//
+//    }
     
     /*
      // MARK: - Navigation
