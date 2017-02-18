@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class BusinessesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
@@ -14,6 +15,7 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
     var businesses: [Business]!
     var searchBar = UISearchBar()
     var category = "Thai"
+    var isMoreDataLoading = false
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -25,9 +27,11 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         self.navigationItem.titleView = searchBar
         self.tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 120
-            
+        //MBProgressHUD.showAdded(to: self.view, animated: true)
+ 
         Business.searchWithTerm(term: category, completion: { (businesses: [Business]?, error: Error?) -> Void in
-            
+       // MBProgressHUD.hide(for: self.view, animated: true)
+
             self.businesses = businesses
             self.tableView.reloadData()
             if let businesses = businesses {
@@ -70,13 +74,21 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        if !searchText.isEmpty {
-//            category = searchText
-//            viewDidLoad()
-//        }
-//
-//    }
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if !searchText.isEmpty  {
+            category = searchText
+            viewDidLoad()
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let cell = sender as! UITableViewCell
+        let indexPath = tableView.indexPath(for: cell)
+        let bussiness = businesses[(indexPath?.row)!]
+        let detailview = segue.destination as! DetailViewController
+        detailview.bussiness = bussiness
+        
+    }
     
     /*
      // MARK: - Navigation
