@@ -54,6 +54,14 @@ class DetailViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let mapDestination = segue.destination as! MapViewController
+        mapDestination.latitude = bussiness?.latitude!
+        print(bussiness?.latitude)
+        mapDestination.longitude = bussiness?.longitude!
+        mapDestination.name = bussiness?.name
+        
+    }
     
 
     /*

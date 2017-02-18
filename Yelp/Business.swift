@@ -18,6 +18,8 @@ class Business: NSObject {
     let reviewCount: NSNumber?
     let phoneNumber: String?
     let webURL: String?
+    var latitude: Double?
+    var longitude: Double?
     
     init(dictionary: NSDictionary) {
         name = dictionary["name"] as? String
@@ -31,8 +33,16 @@ class Business: NSObject {
         
         let location = dictionary["location"] as? NSDictionary
         var address = ""
+        latitude = 0.0
+        longitude = 0.0
+        
         if location != nil {
             let addressArray = location!["address"] as? NSArray
+            let coordinate = location!["coordinate"] as? NSDictionary
+            
+            longitude = coordinate?["longitude"] as? Double
+            latitude = coordinate?["latitude"] as? Double
+            
             if addressArray != nil && addressArray!.count > 0 {
                 address = addressArray![0] as! String
             }
@@ -44,6 +54,7 @@ class Business: NSObject {
                 }
                 address += neighborhoods![0] as! String
             }
+            
         }
         self.address = address
         
@@ -77,7 +88,6 @@ class Business: NSObject {
         reviewCount = dictionary["review_count"] as? NSNumber
         phoneNumber = dictionary["display_phone"] as? String
         webURL = dictionary["url"] as? String
-        
         
     }
     

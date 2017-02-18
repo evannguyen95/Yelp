@@ -208,6 +208,14 @@
                                             <action selector="websiteButton:" destination="Gqq-e7-09R" eventType="touchUpInside" id="3wm-jR-sDJ"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2XP-ho-48z">
+                                        <rect key="frame" x="219" y="64" width="30" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Map"/>
+                                        <connections>
+                                            <segue destination="e91-XZ-H0e" kind="push" id="ldZ-n5-YAL"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
@@ -232,6 +240,34 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xwt-dk-nRh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4025.625" y="186.97183098591549"/>
+        </scene>
+        <!--Map-->
+        <scene sceneID="66l-t6-mc5">
+            <objects>
+                <viewController id="e91-XZ-H0e" customClass="MapViewController" customModule="Yelp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wDD-X8-M9E"/>
+                        <viewControllerLayoutGuide type="bottom" id="aeb-gj-sg3"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="TmU-Iw-bji">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yuh-mC-qYg">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Map" id="EAV-yo-yce"/>
+                    <connections>
+                        <outlet property="mapView" destination="Yuh-mC-qYg" id="jRS-Kq-ek7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kfM-Wv-l0Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4725" y="184.85915492957747"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="3oJ-48-y5f">
